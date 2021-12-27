@@ -189,46 +189,6 @@
         "catchPhrase": "Centralized empowering task-force",
         "bs": "target end-to-end models"
       }
-    },
-    {
-      "name": "eliab",
-      "username": "elaiblm",
-      "email": "eliab@eliab.com",
-      "phone": "3131313",
-      "id": 19
-    },
-    {
-      "name": "john",
-      "username": "johnwick",
-      "email": "john@wick.com",
-      "phone": "31313131",
-      "address": {
-        "street": "carrera 2",
-        "city": "cartagena"
-      },
-      "id": 20
-    },
-    {
-      "name": "iron",
-      "username": "ironman",
-      "email": "iron@man.com",
-      "phone": "3434343",
-      "address": {
-        "street": "carrera 3",
-        "city": "bogota"
-      },
-      "id": 21
-    },
-    {
-      "name": "capitan america",
-      "username": "captain",
-      "email": "capitan@gmail.com",
-      "phone": "5353535",
-      "address": {
-        "street": "carrera 4",
-        "city": "cartagena"
-      },
-      "id": 22
     }
   ]
 }

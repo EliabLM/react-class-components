@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { ButtonGroup, Card, Spinner, Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { getUsers } from '../services/users.services';
+import { getUsers, deleteUser } from '../services/users.services';
+import Swal from 'sweetalert2';
 
 export default class List extends Component {
   constructor(props) {
@@ -19,14 +20,36 @@ export default class List extends Component {
       .catch((error) => console.log(error));
   }
 
+  handleClickDelete(id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(id).then(() => {
+          getUsers()
+            .then((data) => {
+              this.setState({ loading: false, users: data });
+            })
+            .catch((error) => console.log(error));
+          Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+        });
+      }
+    });
+  }
+
   render() {
     const { loading, users } = this.state;
 
     return (
       <Card>
+        <Card.Header>Usuarios</Card.Header>
         <Card.Body>
-          <Card.Title>Usuarios</Card.Title>
-
           {loading ? (
             <Spinner animation='border' role='status'>
               <span className='visually-hidden'>Cargando...</span>
@@ -55,7 +78,12 @@ export default class List extends Component {
                         >
                           Editar
                         </Link>
-                        <button className='btn btn-danger'>Eliminar</button>
+                        <button
+                          onClick={() => this.handleClickDelete(user.id)}
+                          className='btn btn-danger'
+                        >
+                          Eliminar
+                        </button>
                       </ButtonGroup>
                     </td>
                   </tr>

@@ -35,15 +35,15 @@ export default class Create extends Component {
         email,
         phone,
         address: { street, city },
+      }).then(() => {
+        this.props.history.push('/');
       });
-
-      this.props.history.push('/');
     };
 
     return (
       <Card>
+        <Card.Header>Crear Nuevo Usuario</Card.Header>
         <Card.Body>
-          <Card.Title>Crear Nuevo Usuario</Card.Title>
           <Form onSubmit={handleSubmit}>
             <Form.Group className='mb-3'>
               <Form.Label>Nombre</Form.Label>

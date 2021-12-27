@@ -12,7 +12,7 @@ function getUsers() {
 }
 
 function createUser(data) {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch(baseUrl, {
       method: 'POST',
       headers: {
@@ -27,4 +27,15 @@ function createUser(data) {
   });
 }
 
-export { getUsers, createUser };
+function deleteUser(id) {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/${id}`, {
+      method: 'DELETE',
+    })
+      .then((res) => res.json())
+      .then((response) => resolve(response))
+      .catch((error) => reject(error));
+  });
+}
+
+export { getUsers, createUser, deleteUser };
