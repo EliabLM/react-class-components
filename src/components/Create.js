@@ -6,6 +6,9 @@ export default class Create extends Component {
   constructor(props) {
     super(props);
 
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     this.state = {
       name: '',
       username: '',
@@ -16,42 +19,41 @@ export default class Create extends Component {
     };
   }
 
-  render() {
+  handleChange(e) {
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleSubmit(e) {
     const { name, username, email, phone, street, city } = this.state;
+    e.preventDefault();
 
-    const handleChange = (e) => {
-      this.setState({
-        ...this.state,
-        [e.target.name]: e.target.value,
-      });
-    };
+    createUser({
+      name,
+      username,
+      email,
+      phone,
+      address: { street, city },
+    }).then(() => {
+      this.props.history.push('/');
+    });
+  }
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-
-      createUser({
-        name,
-        username,
-        email,
-        phone,
-        address: { street, city },
-      }).then(() => {
-        this.props.history.push('/');
-      });
-    };
-
+  render() {
     return (
       <Card>
         <Card.Header>Crear Nuevo Usuario</Card.Header>
         <Card.Body>
-          <Form onSubmit={handleSubmit}>
+          <Form onSubmit={this.handleSubmit}>
             <Form.Group className='mb-3'>
               <Form.Label>Nombre</Form.Label>
               <Form.Control
                 type='text'
                 placeholder='Nombre'
                 name='name'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>
@@ -62,7 +64,7 @@ export default class Create extends Component {
                 type='text'
                 placeholder='Nombre de usuario'
                 name='username'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>
@@ -73,7 +75,7 @@ export default class Create extends Component {
                 type='email'
                 placeholder='Correo'
                 name='email'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>
@@ -84,7 +86,7 @@ export default class Create extends Component {
                 type='number'
                 placeholder='Teléfono'
                 name='phone'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>
@@ -95,7 +97,7 @@ export default class Create extends Component {
                 type='text'
                 placeholder='Dirección'
                 name='street'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>
@@ -106,7 +108,7 @@ export default class Create extends Component {
                 type='text'
                 placeholder='Ciudad'
                 name='city'
-                onChange={handleChange}
+                onChange={this.handleChange}
                 required
               />
             </Form.Group>

@@ -11,6 +11,15 @@ function getUsers() {
   });
 }
 
+function getUser(id) {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/${id}`)
+      .then((res) => res.json())
+      .then((data) => resolve(data))
+      .catch((error) => reject(error));
+  });
+}
+
 function createUser(data) {
   return new Promise((resolve, reject) => {
     fetch(baseUrl, {
@@ -27,6 +36,22 @@ function createUser(data) {
   });
 }
 
+function updateUser(data) {
+  return new Promise((resolve, reject) => {
+    fetch(`${baseUrl}/${data.id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => resolve(res))
+      .catch((error) => reject(error));
+  });
+}
+
 function deleteUser(id) {
   return new Promise((resolve, reject) => {
     fetch(`${baseUrl}/${id}`, {
@@ -38,4 +63,4 @@ function deleteUser(id) {
   });
 }
 
-export { getUsers, createUser, deleteUser };
+export { getUsers, getUser, createUser, updateUser, deleteUser };
