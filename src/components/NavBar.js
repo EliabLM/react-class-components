@@ -17,6 +17,9 @@ export default class NavBar extends Component {
               <Link to='/create' className='nav-item nav-link'>
                 Crear
               </Link>
+              <Link to='/dashboard' className='nav-item nav-link'>
+                Dashboard
+              </Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

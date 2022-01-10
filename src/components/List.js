@@ -47,56 +47,52 @@ export default class List extends Component {
     const { loading, users } = this.state;
 
     return (
-      <>
-        <Card>
-          <Card.Header>Usuarios</Card.Header>
-          <Card.Body>
-            {loading ? (
-              <Spinner animation='border' role='status'>
-                <span className='visually-hidden'>Cargando...</span>
-              </Spinner>
-            ) : (
-              <>
-                <Table striped bordered hover>
-                  <thead>
-                    <tr>
-                      <th>ID</th>
-                      <th>Nombre</th>
-                      <th>Correo</th>
-                      <th>Acciones</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {users.map((user) => (
-                      <tr key={user.id}>
-                        <td>{user.id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-                        <td>
-                          <ButtonGroup aria-label='Basic example'>
-                            <Link
-                              to={`/update/${user.id}`}
-                              className='btn btn-info'
-                            >
-                              Editar
-                            </Link>
-                            <button
-                              onClick={() => this.handleClickDelete(user.id)}
-                              className='btn btn-danger'
-                            >
-                              Eliminar
-                            </button>
-                          </ButtonGroup>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </Table>
-              </>
-            )}
-          </Card.Body>
-        </Card>
-      </>
+      <Card>
+        <Card.Header>Usuarios</Card.Header>
+        <Card.Body>
+          {loading ? (
+            <Spinner animation='border' role='status'>
+              <span className='visually-hidden'>Cargando...</span>
+            </Spinner>
+          ) : (
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Correo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.id}>
+                    <td>{user.id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>
+                      <ButtonGroup aria-label='Basic example'>
+                        <Link
+                          to={`/update/${user.id}`}
+                          className='btn btn-info'
+                        >
+                          Editar
+                        </Link>
+                        <button
+                          onClick={() => this.handleClickDelete(user.id)}
+                          className='btn btn-danger'
+                        >
+                          Eliminar
+                        </button>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          )}
+        </Card.Body>
+      </Card>
     );
   }
 }

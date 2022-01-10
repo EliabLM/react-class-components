@@ -10,6 +10,7 @@ import NavBar from './components/NavBar';
 import List from './components/List';
 import Create from './components/Create';
 import Update from './components/Update';
+import Dashboard from './components/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <h1>Class Components Project</h1>
         <Switch>
           <Route exact path='/' component={List} />
+          <Route path='/dashboard' component={Dashboard} />
           <Route path='/create' component={Create} />
           <Route path='/update/:id' component={Update} />
           <Redirect from='/*' to='/' />
